@@ -8,17 +8,57 @@ import {
   FiFileText,
   FiSettings,
 } from "react-icons/fi";
+import { useAuth } from "../../../hooks/useAuth";
+import { hasPermission, PERMISSIONS } from "../../../utils/rbac";
 import styles from "./Sidebar.module.css";
 
 const Sidebar = () => {
-  const menuItems = [
-    { path: "/dashboard", icon: <FiHome />, label: "Dashboard" },
-    { path: "/workers", icon: <FiUsers />, label: "Workers" },
-    { path: "/tasks", icon: <FiCheckSquare />, label: "Tasks" },
-    { path: "/analytics", icon: <FiBarChart2 />, label: "Analytics" },
-    { path: "/reports", icon: <FiFileText />, label: "Reports" },
-    { path: "/settings", icon: <FiSettings />, label: "Settings" },
+  const { user } = useAuth();
+  const userRole = user?.role;
+
+  const allMenuItems = [
+    {
+      path: "/dashboard",
+      icon: <FiHome />,
+      label: userRole === "worker" ? "My Dashboard" : "Dashboard",
+      permission: PERMISSIONS.VIEW_DASHBOARD,
+    },
+    {
+      path: "/workers",
+      icon: <FiUsers />,
+      label: "Workers",
+      permission: PERMISSIONS.VIEW_WORKERS,
+    },
+    {
+      path: "/tasks",
+      icon: <FiCheckSquare />,
+      label: userRole === "worker" ? "My Tasks" : "Tasks",
+      permission: PERMISSIONS.VIEW_TASKS,
+    },
+    {
+      path: "/analytics",
+      icon: <FiBarChart2 />,
+      label: userRole === "worker" ? "My Performance" : "Analytics",
+      permission: PERMISSIONS.VIEW_ANALYTICS,
+    },
+    {
+      path: "/reports",
+      icon: <FiFileText />,
+      label: "Reports",
+      permission: PERMISSIONS.VIEW_REPORTS,
+    },
+    {
+      path: "/settings",
+      icon: <FiSettings />,
+      label: "Settings",
+      permission: PERMISSIONS.VIEW_SETTINGS,
+    },
   ];
+
+  // Filter menu items based on user permissions
+  const menuItems = allMenuItems.filter((item) =>
+    hasPermission(userRole, item.permission),
+  );
 
   return (
     <aside className={styles.sidebar}>

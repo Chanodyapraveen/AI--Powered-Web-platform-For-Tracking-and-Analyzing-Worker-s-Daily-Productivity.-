@@ -9,6 +9,7 @@ import Tasks from "../pages/Tasks/Tasks";
 import Analytics from "../pages/Analytics/Analytics";
 import Login from "../pages/Login/Login";
 import Loader from "../components/common/Loader/Loader";
+import { canAccessRoute } from "../utils/rbac";
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -19,6 +20,41 @@ const ProtectedRoute = ({ children }) => {
   }
 
   return isAuthenticated ? children : <Navigate to="/login" replace />;
+};
+
+// Role-Based Route Component
+const RoleRoute = ({ children, path }) => {
+  const { user, isAuthenticated, loading } = useAuth();
+
+  if (loading) {
+    return <Loader fullScreen text="Loading..." />;
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (!canAccessRoute(user?.role, path)) {
+    return (
+      <AppLayout>
+        <div
+          style={{
+            padding: "3rem",
+            textAlign: "center",
+            color: "var(--text-secondary)",
+          }}
+        >
+          <h2 style={{ color: "var(--danger-color)", marginBottom: "1rem" }}>
+            Access Denied
+          </h2>
+          <p>You don't have permission to access this page.</p>
+          <Navigate to="/dashboard" replace />
+        </div>
+      </AppLayout>
+    );
+  }
+
+  return children;
 };
 
 // Layout Component
@@ -64,55 +100,55 @@ const AppRoutes = () => {
       <Route
         path="/workers"
         element={
-          <ProtectedRoute>
+          <RoleRoute path="/workers">
             <AppLayout>
               <Workers />
             </AppLayout>
-          </ProtectedRoute>
+          </RoleRoute>
         }
       />
 
       <Route
         path="/tasks"
         element={
-          <ProtectedRoute>
+          <RoleRoute path="/tasks">
             <AppLayout>
               <Tasks />
             </AppLayout>
-          </ProtectedRoute>
+          </RoleRoute>
         }
       />
 
       <Route
         path="/analytics"
         element={
-          <ProtectedRoute>
+          <RoleRoute path="/analytics">
             <AppLayout>
               <Analytics />
             </AppLayout>
-          </ProtectedRoute>
+          </RoleRoute>
         }
       />
 
       <Route
         path="/reports"
         element={
-          <ProtectedRoute>
+          <RoleRoute path="/reports">
             <AppLayout>
               <div>Reports Page (Coming Soon)</div>
             </AppLayout>
-          </ProtectedRoute>
+          </RoleRoute>
         }
       />
 
       <Route
         path="/settings"
         element={
-          <ProtectedRoute>
+          <RoleRoute path="/settings">
             <AppLayout>
               <div>Settings Page (Coming Soon)</div>
             </AppLayout>
-          </ProtectedRoute>
+          </RoleRoute>
         }
       />
 

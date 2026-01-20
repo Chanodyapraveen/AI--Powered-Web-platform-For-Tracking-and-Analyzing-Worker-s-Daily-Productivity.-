@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../../hooks/useAuth";
+import RoleBadge from "../../common/RoleBadge/RoleBadge";
 import styles from "./Navbar.module.css";
 
 const Navbar = () => {
@@ -16,6 +17,7 @@ const Navbar = () => {
         <div className={styles.navItems}>
           {user ? (
             <>
+              <RoleBadge />
               <span className={styles.userName}>Welcome, {user.name}</span>
               <button onClick={logout} className={styles.logoutBtn}>
                 Logout
