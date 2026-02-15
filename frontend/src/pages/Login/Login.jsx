@@ -5,7 +5,6 @@ import Input from "../../components/common/Input/Input";
 import Button from "../../components/common/Button/Button";
 import Card from "../../components/common/Card/Card";
 import { FiMail, FiLock, FiArrowRight } from "react-icons/fi";
-import styles from "./Login.module.css";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -64,29 +63,35 @@ const Login = () => {
   };
 
   return (
-    <div className={styles.loginPage}>
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#1e6b52] via-[#165543] to-[#0f3d2a] p-4 lg:p-6 relative">
       <button
-        className={styles.homeButton}
+        className="absolute top-8 px-8 py-3 bg-transparent border-2 border-white/30 rounded-lg text-white text-base font-medium cursor-pointer transition-all duration-300 hover:bg-white/10 hover:border-white/50"
         onClick={() => navigate("/")}
         type="button"
       >
         Home
       </button>
 
-      <Card className={styles.loginCard}>
-        <div className={styles.header}>
-          <div className={styles.logoContainer}>
-            <span className={styles.leafIcon}>🍃</span>
-            <h1 className={styles.title}>CeylonLeaf</h1>
+      <Card className="w-full max-w-md p-10 !bg-[#1c5e4e]/85 backdrop-blur-md border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
+        <div className="text-center mb-8">
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <span className="text-4xl drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]">
+              🍃
+            </span>
+            <h1 className="text-3xl font-semibold text-white m-0 drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]">
+              CeylonLeaf
+            </h1>
           </div>
-          <p className={styles.subtitle}>
+          <p className="text-white/85 text-[0.95rem] leading-relaxed m-0">
             Sign in to manage fields, workers, and factory handovers.
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className={styles.form}>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           {errors.general && (
-            <div className={styles.errorAlert}>{errors.general}</div>
+            <div className="px-3.5 py-3.5 bg-red-100/90 text-red-600 rounded-lg text-sm text-center border border-red-400/20">
+              {errors.general}
+            </div>
           )}
 
           <Input
@@ -117,28 +122,28 @@ const Login = () => {
             type="submit"
             fullWidth
             disabled={loading}
-            className={styles.signInButton}
+            className="!bg-ceylon-green-500 flex items-center justify-center gap-2 !py-3.5 !text-base !font-medium transition-all duration-300 hover:!bg-ceylon-green-600 hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(34,197,94,0.3)]"
           >
             {loading ? (
               "Signing in..."
             ) : (
               <>
-                Sign in <FiArrowRight className={styles.arrowIcon} />
+                Sign in <FiArrowRight className="text-lg" />
               </>
             )}
           </Button>
         </form>
 
-        <div className={styles.cardFooter}>
-          <span className={styles.footerIcon}>🍃</span>
-          <span className={styles.footerText}>
+        <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between text-[0.85rem]">
+          <span className="text-base">🍃</span>
+          <span className="text-white/70 flex-1 mx-3">
             Tea estates • Factory integration
           </span>
-          <span className={styles.version}>v1.0</span>
+          <span className="text-white/60 font-medium">v1.0</span>
         </div>
       </Card>
 
-      <p className={styles.helpText}>
+      <p className="mt-6 text-white/70 text-sm text-center">
         Trouble logging in? Contact your administrator for credentials.
       </p>
     </div>
