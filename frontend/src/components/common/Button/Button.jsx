@@ -10,9 +10,11 @@ const Button = ({
   type = "button",
   fullWidth = false,
   icon,
+  className: customClassName,
   ...props
 }) => {
-  const className = `${styles.button} ${styles[variant]} ${styles[size]} ${fullWidth ? styles.fullWidth : ""}`;
+  const className =
+    `${styles.button} ${styles[variant]} ${styles[size]} ${fullWidth ? styles.fullWidth : ""} ${customClassName || ""}`.trim();
 
   return (
     <button

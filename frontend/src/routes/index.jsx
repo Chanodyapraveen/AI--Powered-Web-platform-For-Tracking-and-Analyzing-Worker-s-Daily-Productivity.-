@@ -8,6 +8,7 @@ import Workers from "../pages/Workers/Workers";
 import Tasks from "../pages/Tasks/Tasks";
 import Analytics from "../pages/Analytics/Analytics";
 import Login from "../pages/Login/Login";
+import Home from "../pages/Home/Home";
 import Loader from "../components/common/Loader/Loader";
 import { canAccessRoute } from "../utils/rbac";
 
@@ -73,18 +74,8 @@ const AppLayout = ({ children }) => {
 const AppRoutes = () => {
   return (
     <Routes>
+      <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
-
-      <Route
-        path="/"
-        element={
-          <ProtectedRoute>
-            <AppLayout>
-              <Navigate to="/dashboard" replace />
-            </AppLayout>
-          </ProtectedRoute>
-        }
-      />
 
       <Route
         path="/dashboard"

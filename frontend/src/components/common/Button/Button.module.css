@@ -56,6 +56,18 @@
   color: var(--text-light);
 }
 
+/* White outline variant for home page header */
+.outline.whiteOutline {
+  border-color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.outline.whiteOutline:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: white;
+  color: white;
+}
+
 .ghost {
   background-color: transparent;
   color: var(--text-primary);

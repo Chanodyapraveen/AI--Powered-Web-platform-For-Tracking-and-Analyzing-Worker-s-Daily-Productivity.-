@@ -1,3 +1,42 @@
+/* CSS Custom Properties */
+:root {
+  --primary-color: #4f46e5;
+  --primary-dark: #3730a3;
+  --secondary-color: #10b981;
+  --danger-color: #ef4444;
+  --text-light: #ffffff;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f3f4f6;
+  --border-light: #e5e7eb;
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  
+  /* Border radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  
+  /* Transitions */
+  --transition-base: 0.3s ease;
+
+  /* Text sizes */
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+}
+
 .app {
   min-height: 100vh;
   display: flex;
