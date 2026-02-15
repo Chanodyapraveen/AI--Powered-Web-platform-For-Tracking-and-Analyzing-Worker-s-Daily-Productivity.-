@@ -10,7 +10,6 @@ import {
 } from "react-icons/fi";
 import { useAuth } from "../../../hooks/useAuth";
 import { hasPermission, PERMISSIONS } from "../../../utils/rbac";
-import styles from "./Sidebar.module.css";
 
 const Sidebar = () => {
   const { user } = useAuth();
@@ -61,18 +60,22 @@ const Sidebar = () => {
   );
 
   return (
-    <aside className={styles.sidebar}>
-      <nav className={styles.nav}>
+    <aside className="w-[250px] md:w-[250px] max-md:w-[70px] bg-white border-r border-gray-200 h-screen sticky top-0 overflow-y-auto">
+      <nav className="py-6">
         {menuItems.map((item) => (
           <NavLink
             key={item.path}
             to={item.path}
             className={({ isActive }) =>
-              `${styles.navItem} ${isActive ? styles.active : ""}`
+              `flex items-center gap-3 px-6 py-3 no-underline transition-all border-l-[3px] max-md:justify-center ${
+                isActive
+                  ? "bg-indigo-600/10 text-indigo-600 border-l-indigo-600 font-medium"
+                  : "text-gray-500 border-l-transparent hover:bg-gray-100 hover:text-gray-900"
+              }`
             }
           >
-            <span className={styles.icon}>{item.icon}</span>
-            <span className={styles.label}>{item.label}</span>
+            <span className="text-xl flex items-center">{item.icon}</span>
+            <span className="text-base max-md:hidden">{item.label}</span>
           </NavLink>
         ))}
       </nav>

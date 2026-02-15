@@ -1,33 +1,28 @@
 import React from "react";
 import { useAuth } from "../../../hooks/useAuth";
-import styles from "./RoleBadge.module.css";
+
+const roleClasses = {
+  admin: "bg-red-500/30 text-red-600",
+  manager: "bg-amber-500/30 text-amber-500",
+  worker: "bg-emerald-500/30 text-emerald-500",
+};
+
+const roleLabels = {
+  admin: "Admin",
+  manager: "Manager",
+  worker: "Worker",
+};
 
 const RoleBadge = () => {
   const { user } = useAuth();
 
   if (!user) return null;
 
-  const roleColors = {
-    admin: { bg: "#dc26264d", text: "#dc2626" },
-    manager: { bg: "#f59e0b4d", text: "#f59e0b" },
-    worker: { bg: "#10b9814d", text: "#10b981" },
-  };
-
-  const roleLabels = {
-    admin: "Admin",
-    manager: "Manager",
-    worker: "Worker",
-  };
-
-  const color = roleColors[user.role] || roleColors.worker;
-
   return (
     <span
-      className={styles.badge}
-      style={{
-        backgroundColor: color.bg,
-        color: color.text,
-      }}
+      className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
+        roleClasses[user.role] || roleClasses.worker
+      }`}
     >
       {roleLabels[user.role] || user.role}
     </span>

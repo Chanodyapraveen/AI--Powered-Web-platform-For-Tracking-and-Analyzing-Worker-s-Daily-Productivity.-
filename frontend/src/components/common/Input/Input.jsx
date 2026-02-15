@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./Input.module.css";
 
 const Input = ({
   label,
@@ -15,14 +14,18 @@ const Input = ({
   ...props
 }) => {
   return (
-    <div className={styles.inputGroup}>
+    <div className="flex flex-col gap-1.5">
       {label && (
-        <label htmlFor={name} className={styles.label}>
-          {label} {required && <span className={styles.required}>*</span>}
+        <label htmlFor={name} className="text-sm font-medium text-gray-700">
+          {label} {required && <span className="text-red-500">*</span>}
         </label>
       )}
-      <div className={styles.inputWrapper}>
-        {icon && <span className={styles.icon}>{icon}</span>}
+      <div className="relative">
+        {icon && (
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg">
+            {icon}
+          </span>
+        )}
         <input
           id={name}
           type={type}
@@ -32,11 +35,17 @@ const Input = ({
           placeholder={placeholder}
           disabled={disabled}
           required={required}
-          className={`${styles.input} ${icon ? styles.withIcon : ""} ${error ? styles.error : ""}`}
+          className={`w-full px-4 py-2.5 text-base rounded-lg border bg-white text-gray-900 outline-none transition-all duration-200 placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 disabled:bg-gray-100 disabled:cursor-not-allowed ${
+            icon ? "pl-10" : ""
+          } ${
+            error
+              ? "border-red-500 focus:ring-red-500 focus:border-red-500"
+              : "border-gray-300"
+          }`}
           {...props}
         />
       </div>
-      {error && <span className={styles.errorMessage}>{error}</span>}
+      {error && <span className="text-xs text-red-500 mt-0.5">{error}</span>}
     </div>
   );
 };

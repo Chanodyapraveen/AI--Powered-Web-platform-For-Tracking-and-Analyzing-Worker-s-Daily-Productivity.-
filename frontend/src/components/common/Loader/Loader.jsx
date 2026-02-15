@@ -1,5 +1,10 @@
 import React from "react";
-import styles from "./Loader.module.css";
+
+const sizeClasses = {
+  small: "w-6 h-6 border-2",
+  medium: "w-10 h-10 border-4",
+  large: "w-16 h-16 border-4",
+};
 
 const Loader = ({
   size = "medium",
@@ -7,15 +12,19 @@ const Loader = ({
   fullScreen = false,
 }) => {
   const LoaderContent = () => (
-    <div className={styles.loaderContainer}>
-      <div className={`${styles.spinner} ${styles[size]}`}></div>
-      {text && <p className={styles.text}>{text}</p>}
+    <div className="flex flex-col items-center justify-center gap-3">
+      <div
+        className={`rounded-full border-gray-200 border-t-indigo-600 animate-spin ${
+          sizeClasses[size] || sizeClasses.medium
+        }`}
+      ></div>
+      {text && <p className="text-sm text-gray-500">{text}</p>}
     </div>
   );
 
   if (fullScreen) {
     return (
-      <div className={styles.fullScreen}>
+      <div className="fixed inset-0 flex items-center justify-center bg-white/80 z-50">
         <LoaderContent />
       </div>
     );
