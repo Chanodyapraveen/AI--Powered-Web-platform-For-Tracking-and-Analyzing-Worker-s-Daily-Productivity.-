@@ -10,14 +10,18 @@ const Navbar = () => {
     <nav className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-[100]">
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
         <Link to="/" className="no-underline">
-          <h1 className="text-xl md:text-xl text-indigo-600 m-0 font-bold">Productivity Tracker</h1>
+          <h1 className="text-xl md:text-xl text-indigo-600 m-0 font-bold">
+            Productivity Tracker
+          </h1>
         </Link>
 
         <div className="flex items-center gap-6">
           {user ? (
             <>
               <RoleBadge />
-              <span className="text-gray-900 font-medium hidden md:inline">Welcome, {user.name}</span>
+              <span className="text-gray-900 font-medium hidden md:inline">
+                Welcome, {user.name}
+              </span>
               <button
                 onClick={logout}
                 className="px-4 py-2 bg-red-500 text-white border-none rounded-md font-medium cursor-pointer transition-all hover:bg-red-600"

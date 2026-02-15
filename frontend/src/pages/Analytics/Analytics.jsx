@@ -6,7 +6,9 @@ const Analytics = () => {
     <div className="max-w-7xl mx-auto">
       <div className="mb-8">
         <h1 className="text-3xl text-gray-900 mb-2">Analytics</h1>
-        <p className="text-gray-500 text-base">Visualize productivity trends and insights</p>
+        <p className="text-gray-500 text-base">
+          Visualize productivity trends and insights
+        </p>
       </div>
 
       <Card>
