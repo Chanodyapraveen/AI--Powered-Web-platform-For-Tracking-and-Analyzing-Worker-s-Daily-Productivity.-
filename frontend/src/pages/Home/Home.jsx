@@ -2,7 +2,15 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import Button from "../../components/common/Button/Button";
+import BackgroundCarousel from "../../components/common/BackgroundCarousel/BackgroundCarousel";
 import { FiUser, FiTrendingUp, FiUsers, FiPackage } from "react-icons/fi";
+
+// Replace these with your actual image paths/URLs
+const CAROUSEL_IMAGES = [
+  "/images/banner-sp-1024x576.jpg",
+  "/images/jerry-kavan-i9eaAR4dWi8-unsplash.jpg",
+  "/images/pexels-andrea-zanenga-9756792-6120446.jpg",
+];
 
 const Home = () => {
   const navigate = useNavigate();
@@ -40,12 +48,15 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#2d7d56] via-[#1a5438] to-[#0f3d2a] bg-cover bg-center bg-fixed relative flex flex-col">
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/40 z-[1]"></div>
-
+    <BackgroundCarousel
+      images={CAROUSEL_IMAGES}
+      interval={5000}
+      overlayClassName="bg-black/50"
+      showIndicators={true}
+      showArrows={false}
+    >
       {/* Header */}
-      <header className="relative z-[2] py-4 bg-[#2d7d56]/90 backdrop-blur-md">
+      <header className="py-4 bg-[#2d7d56]/90 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-8 flex justify-between items-center">
           <div className="flex items-center gap-2 text-white">
             <div className="text-2xl">🍃</div>
@@ -63,7 +74,7 @@ const Home = () => {
       </header>
 
       {/* Hero Section */}
-      <main className="relative z-[2] flex-1 flex items-center justify-center px-8 py-16 text-center">
+      <main className="flex-1 flex items-center justify-center px-8 py-16 text-center">
         <div className="max-w-3xl">
           <div className="text-6xl mb-4">🍃</div>
           <h1 className="text-6xl font-bold text-white mb-6 drop-shadow-[2px_2px_4px_rgba(0,0,0,0.5)]">
@@ -78,7 +89,12 @@ const Home = () => {
             and seamless handover to the factory.
           </p>
           <div className="mt-8">
-            <Button variant="primary" size="large" onClick={handleLogin}>
+            <Button
+              variant="primary"
+              size="large"
+              onClick={handleLogin}
+              className="!bg-green-600 hover:!bg-green-700"
+            >
               Login
             </Button>
           </div>
@@ -86,7 +102,7 @@ const Home = () => {
       </main>
 
       {/* Statistics Section */}
-      <section className="relative z-[2] py-8 bg-black/60 backdrop-blur-md">
+      <section className="py-8 bg-black/60 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
             <div
@@ -103,7 +119,7 @@ const Home = () => {
           ))}
         </div>
       </section>
-    </div>
+    </BackgroundCarousel>
   );
 };
 

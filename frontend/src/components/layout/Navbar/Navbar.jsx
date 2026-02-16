@@ -11,7 +11,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
         <Link to="/" className="no-underline">
           <h1 className="text-xl md:text-xl text-indigo-600 m-0 font-bold">
-            Productivity Tracker
+            Ceylon Leaf
           </h1>
         </Link>
 

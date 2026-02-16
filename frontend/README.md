@@ -1,4 +1,4 @@
-# Worker Productivity Tracker - Frontend
+# Ceylon Leaf - Frontend
 
 AI-Powered Web Platform For Tracking and Analyzing Worker's Daily Productivity
 
