@@ -81,7 +81,7 @@ const Home = () => {
             CeylonLeaf
           </h1>
           <p className="text-xl text-white/90 mb-8 leading-relaxed drop-shadow-[1px_1px_2px_rgba(0,0,0,0.5)]">
-            Smart tools for tea estates — from field planning and worker
+            Smart tools for tea estates from field planning and worker
             management to{" "}
             <span className="text-green-500 font-semibold">
               harvest tracking
