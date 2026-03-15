@@ -53,10 +53,16 @@ const Login = () => {
 
     setLoading(true);
     try {
-      await login(formData);
+      await login({
+        ...formData,
+        email: formData.email.trim().toLowerCase(),
+      });
       navigate("/dashboard");
     } catch (error) {
-      setErrors({ general: "Login failed. Please check your credentials." });
+      setErrors({
+        general:
+          error.message || "Login failed. Please check your credentials.",
+      });
     } finally {
       setLoading(false);
     }

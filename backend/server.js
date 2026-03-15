@@ -18,12 +18,28 @@ connectDB();
 
 const app = express();
 
+const envOrigins = [process.env.FRONTEND_URLS, process.env.FRONTEND_URL]
+  .filter(Boolean)
+  .flatMap((value) => value.split(","))
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
+const allowedOrigins = Array.from(
+  new Set(["http://localhost:3000", "http://localhost:5173", ...envOrigins]),
+);
+
 // Security middleware
 app.use(helmet());
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:5173",
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error("Not allowed by CORS"));
+    },
     credentials: true,
+    optionsSuccessStatus: 200,
   }),
 );
 
