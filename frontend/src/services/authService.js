@@ -29,6 +29,14 @@ export const authService = {
     }
   },
 
+  createUser: async (userData) => {
+    try {
+      return await api.post("/auth/users", userData);
+    } catch (error) {
+      throw error;
+    }
+  },
+
   // Logout
   logout: () => {
     localStorage.removeItem("token");

@@ -5,12 +5,14 @@ const roleClasses = {
   admin: "bg-red-500/30 text-red-600",
   manager: "bg-amber-500/30 text-amber-500",
   worker: "bg-emerald-500/30 text-emerald-500",
+  supplier: "bg-sky-500/30 text-sky-600",
 };
 
 const roleLabels = {
   admin: "Admin",
   manager: "Manager",
   worker: "Worker",
+  supplier: "Supplier",
 };
 
 const RoleBadge = () => {

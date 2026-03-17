@@ -2,10 +2,40 @@ const jwt = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
 const User = require("../models/User");
 
+const PUBLIC_REGISTRATION_ROLES = ["worker", "supplier"];
+const MANAGED_REGISTRATION_ROLES = ["admin", "manager", "worker", "supplier"];
+
 // Generate JWT token
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN || "7d",
+  });
+};
+
+const createUserAccount = async ({
+  name,
+  email,
+  password,
+  role,
+  department,
+  phone,
+}) => {
+  const normalizedEmail = email.trim().toLowerCase();
+
+  const existingUser = await User.findOne({ email: normalizedEmail });
+  if (existingUser) {
+    const error = new Error("Email already exists");
+    error.statusCode = 400;
+    throw error;
+  }
+
+  return User.create({
+    name,
+    email: normalizedEmail,
+    password,
+    role,
+    department,
+    phone,
   });
 };
 
@@ -18,19 +48,23 @@ exports.register = async (req, res, next) => {
       return res.status(400).json({ message: errors.array()[0].msg });
     }
 
-    const { name, email, password, role } = req.body;
-    const normalizedEmail = email.trim().toLowerCase();
+    const { name, email, password, role, department, phone } = req.body;
+    const requestedRole = role || "worker";
 
-    const existingUser = await User.findOne({ email: normalizedEmail });
-    if (existingUser) {
-      return res.status(400).json({ message: "Email already exists" });
+    if (!PUBLIC_REGISTRATION_ROLES.includes(requestedRole)) {
+      return res.status(403).json({
+        message:
+          "Only worker and supplier accounts can be created from the public registration page",
+      });
     }
 
-    const user = await User.create({
+    const user = await createUserAccount({
       name,
-      email: normalizedEmail,
+      email,
       password,
-      role: role || "worker",
+      role: requestedRole,
+      department,
+      phone,
     });
 
     const token = generateToken(user._id);
@@ -41,6 +75,44 @@ exports.register = async (req, res, next) => {
       message: "Registration successful",
     });
   } catch (error) {
+    next(error);
+  }
+};
+
+// @desc    Create a new user as admin
+// @route   POST /api/auth/users
+exports.createUser = async (req, res, next) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ message: errors.array()[0].msg });
+    }
+
+    const { name, email, password, role, department, phone } = req.body;
+    const requestedRole = role || "worker";
+
+    if (!MANAGED_REGISTRATION_ROLES.includes(requestedRole)) {
+      return res.status(400).json({ message: "Invalid role selected" });
+    }
+
+    const user = await createUserAccount({
+      name,
+      email,
+      password,
+      role: requestedRole,
+      department,
+      phone,
+    });
+
+    res.status(201).json({
+      user: user.toJSON(),
+      message: `${requestedRole} account created successfully`,
+    });
+  } catch (error) {
+    if (error.statusCode) {
+      return res.status(error.statusCode).json({ message: error.message });
+    }
+
     next(error);
   }
 };

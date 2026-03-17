@@ -14,7 +14,7 @@ const CAROUSEL_IMAGES = [
 
 const Home = () => {
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
 
   const handleLogin = () => {
     if (isAuthenticated) {
@@ -22,6 +22,10 @@ const Home = () => {
     } else {
       navigate("/login");
     }
+  };
+
+  const handleRegister = () => {
+    navigate("/register");
   };
 
   const stats = [
@@ -70,6 +74,15 @@ const Home = () => {
           >
             {isAuthenticated ? "Dashboard" : "Login"}
           </Button>
+          {!isAuthenticated && (
+            <Button
+              variant="primary"
+              onClick={handleRegister}
+              className="!bg-white !text-[#1e6b52] hover:!bg-[#f3fbf7]"
+            >
+              Register
+            </Button>
+          )}
         </div>
       </header>
 
@@ -89,14 +102,26 @@ const Home = () => {
             and seamless handover to the factory.
           </p>
           <div className="mt-8">
-            <Button
-              variant="primary"
-              size="large"
-              onClick={handleLogin}
-              className="!bg-green-600 hover:!bg-green-700"
-            >
-              Login
-            </Button>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Button
+                variant="primary"
+                size="large"
+                onClick={handleLogin}
+                className="!bg-green-600 hover:!bg-green-700"
+              >
+                {isAuthenticated ? "Open Dashboard" : "Login"}
+              </Button>
+              {(!isAuthenticated || user?.role === "admin") && (
+                <Button
+                  variant="outline"
+                  size="large"
+                  onClick={handleRegister}
+                  className="!border-white !text-white hover:!bg-white/10"
+                >
+                  {user?.role === "admin" ? "Create Account" : "Register"}
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       </main>

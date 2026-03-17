@@ -30,12 +30,20 @@ const Navbar = () => {
               </button>
             </>
           ) : (
-            <Link
-              to="/login"
-              className="px-4 py-2 bg-indigo-600 text-white rounded-md font-medium no-underline transition-all hover:bg-indigo-700"
-            >
-              Login
-            </Link>
+            <div className="flex items-center gap-3">
+              <Link
+                to="/register"
+                className="px-4 py-2 bg-emerald-500 text-white rounded-md font-medium no-underline transition-all hover:bg-emerald-600"
+              >
+                Register
+              </Link>
+              <Link
+                to="/login"
+                className="px-4 py-2 bg-indigo-600 text-white rounded-md font-medium no-underline transition-all hover:bg-indigo-700"
+              >
+                Login
+              </Link>
+            </div>
           )}
         </div>
       </div>

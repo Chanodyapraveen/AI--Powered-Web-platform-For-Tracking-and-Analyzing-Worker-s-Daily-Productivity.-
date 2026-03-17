@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["admin", "manager", "worker"],
+      enum: ["admin", "manager", "worker", "supplier"],
       default: "worker",
     },
     department: {
@@ -70,7 +70,6 @@ userSchema.methods.toJSON = function () {
 };
 
 module.exports = mongoose.model("User", userSchema);
-
 
 /*
 {

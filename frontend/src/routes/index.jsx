@@ -9,6 +9,7 @@ import Tasks from "../pages/Tasks/Tasks";
 import Analytics from "../pages/Analytics/Analytics";
 import Login from "../pages/Login/Login";
 import Home from "../pages/Home/Home";
+import Register from "../pages/Register/Register";
 import Loader from "../components/common/Loader/Loader";
 import { canAccessRoute } from "../utils/rbac";
 
@@ -76,6 +77,7 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
 
       <Route
         path="/dashboard"

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import Input from "../../components/common/Input/Input";
 import Button from "../../components/common/Button/Button";
@@ -139,6 +139,16 @@ const Login = () => {
             )}
           </Button>
         </form>
+
+        <div className="mt-6 text-center text-sm text-white/80">
+          Need an account?{" "}
+          <Link
+            to="/register"
+            className="font-semibold text-emerald-300 no-underline hover:text-emerald-200"
+          >
+            Register here
+          </Link>
+        </div>
 
         <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-between text-[0.85rem]">
           <span className="text-base">🍃</span>

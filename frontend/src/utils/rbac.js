@@ -1,21 +1,22 @@
 // Role-based access control utilities
 
 export const ROLES = {
-  ADMIN: 'admin',
-  MANAGER: 'manager',
-  WORKER: 'worker',
+  ADMIN: "admin",
+  MANAGER: "manager",
+  WORKER: "worker",
+  SUPPLIER: "supplier",
 };
 
 export const PERMISSIONS = {
-  VIEW_DASHBOARD: 'view_dashboard',
-  VIEW_WORKERS: 'view_workers',
-  MANAGE_WORKERS: 'manage_workers',
-  VIEW_TASKS: 'view_tasks',
-  MANAGE_TASKS: 'manage_tasks',
-  VIEW_ANALYTICS: 'view_analytics',
-  VIEW_REPORTS: 'view_reports',
-  VIEW_SETTINGS: 'view_settings',
-  MANAGE_SETTINGS: 'manage_settings',
+  VIEW_DASHBOARD: "view_dashboard",
+  VIEW_WORKERS: "view_workers",
+  MANAGE_WORKERS: "manage_workers",
+  VIEW_TASKS: "view_tasks",
+  MANAGE_TASKS: "manage_tasks",
+  VIEW_ANALYTICS: "view_analytics",
+  VIEW_REPORTS: "view_reports",
+  VIEW_SETTINGS: "view_settings",
+  MANAGE_SETTINGS: "manage_settings",
 };
 
 // Define permissions for each role
@@ -40,10 +41,8 @@ const rolePermissions = {
     PERMISSIONS.VIEW_ANALYTICS,
     PERMISSIONS.VIEW_REPORTS,
   ],
-  [ROLES.WORKER]: [
-    PERMISSIONS.VIEW_DASHBOARD,
-    PERMISSIONS.VIEW_TASKS,
-  ],
+  [ROLES.WORKER]: [PERMISSIONS.VIEW_DASHBOARD, PERMISSIONS.VIEW_TASKS],
+  [ROLES.SUPPLIER]: [PERMISSIONS.VIEW_DASHBOARD],
 };
 
 /**
@@ -59,14 +58,14 @@ export const hasPermission = (userRole, permission) => {
  * Check if a user has any of the specified permissions
  */
 export const hasAnyPermission = (userRole, permissions) => {
-  return permissions.some(permission => hasPermission(userRole, permission));
+  return permissions.some((permission) => hasPermission(userRole, permission));
 };
 
 /**
  * Check if a user has all of the specified permissions
  */
 export const hasAllPermissions = (userRole, permissions) => {
-  return permissions.every(permission => hasPermission(userRole, permission));
+  return permissions.every((permission) => hasPermission(userRole, permission));
 };
 
 /**
@@ -74,31 +73,31 @@ export const hasAllPermissions = (userRole, permissions) => {
  */
 export const getAllowedRoutes = (userRole) => {
   const routes = [];
-  
+
   if (hasPermission(userRole, PERMISSIONS.VIEW_DASHBOARD)) {
-    routes.push('/dashboard');
+    routes.push("/dashboard");
   }
-  
+
   if (hasPermission(userRole, PERMISSIONS.VIEW_WORKERS)) {
-    routes.push('/workers');
+    routes.push("/workers");
   }
-  
+
   if (hasPermission(userRole, PERMISSIONS.VIEW_TASKS)) {
-    routes.push('/tasks');
+    routes.push("/tasks");
   }
-  
+
   if (hasPermission(userRole, PERMISSIONS.VIEW_ANALYTICS)) {
-    routes.push('/analytics');
+    routes.push("/analytics");
   }
-  
+
   if (hasPermission(userRole, PERMISSIONS.VIEW_REPORTS)) {
-    routes.push('/reports');
+    routes.push("/reports");
   }
-  
+
   if (hasPermission(userRole, PERMISSIONS.VIEW_SETTINGS)) {
-    routes.push('/settings');
+    routes.push("/settings");
   }
-  
+
   return routes;
 };
 
@@ -107,5 +106,5 @@ export const getAllowedRoutes = (userRole) => {
  */
 export const canAccessRoute = (userRole, route) => {
   const allowedRoutes = getAllowedRoutes(userRole);
-  return allowedRoutes.some(allowedRoute => route.startsWith(allowedRoute));
+  return allowedRoutes.some((allowedRoute) => route.startsWith(allowedRoute));
 };
