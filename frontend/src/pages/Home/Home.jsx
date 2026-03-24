@@ -3,7 +3,17 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import Button from "../../components/common/Button/Button";
 import BackgroundCarousel from "../../components/common/BackgroundCarousel/BackgroundCarousel";
-import { FiUser, FiTrendingUp, FiUsers, FiPackage } from "react-icons/fi";
+import {
+  FiUser,
+  FiTrendingUp,
+  FiUsers,
+  FiPackage,
+  FiMap,
+  FiBarChart2,
+  FiTruck,
+  FiClipboard,
+  FiBox,
+} from "react-icons/fi";
 
 // Replace these with your actual image paths/URLs
 const CAROUSEL_IMAGES = [
@@ -48,6 +58,45 @@ const Home = () => {
       value: "7",
       label: "Factories Linked",
       icon: <FiPackage />,
+    },
+  ];
+
+  const operations = [
+    {
+      title: "Fields Management",
+      description:
+        "Map plots, plan rounds, and monitor yield potential with clear field insights.",
+      icon: <FiMap />,
+    },
+    {
+      title: "Workers",
+      description:
+        "Assign tasks, track attendance, and review performance in one place.",
+      icon: <FiUsers />,
+    },
+    {
+      title: "Harvests & Reports",
+      description:
+        "Capture daily plucking, analyze trends, and export clean summaries.",
+      icon: <FiBarChart2 />,
+    },
+    {
+      title: "Weighing & Bins",
+      description:
+        "Record weights at collection points and keep inventory tidy.",
+      icon: <FiBox />,
+    },
+    {
+      title: "Logistics",
+      description:
+        "Coordinate transport from field sheds to the factory gate smoothly.",
+      icon: <FiTruck />,
+    },
+    {
+      title: "Factory Handover",
+      description:
+        "Generate handover notes and confirm reception at the factory.",
+      icon: <FiClipboard />,
     },
   ];
 
@@ -142,6 +191,30 @@ const Home = () => {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Operations Section */}
+      <section className="pb-16 pt-10">
+        <div className="max-w-7xl mx-auto px-6 md:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 md:gap-6">
+            {operations.map((item, index) => (
+              <article
+                key={index}
+                className="rounded-3xl border border-white/25 bg-white/12 backdrop-blur-xl px-6 py-7 shadow-[0_12px_35px_rgba(0,0,0,0.28)] transition-all duration-300 hover:-translate-y-1 hover:bg-white/18"
+              >
+                <div className="w-11 h-11 rounded-xl border border-white/35 bg-white/15 flex items-center justify-center text-white text-xl mb-4">
+                  {item.icon}
+                </div>
+                <h3 className="text-3xl sm:text-[2rem] leading-tight font-bold text-white drop-shadow-[1px_1px_2px_rgba(0,0,0,0.5)] mb-3">
+                  {item.title}
+                </h3>
+                <p className="text-white/85 text-lg leading-relaxed drop-shadow-[1px_1px_2px_rgba(0,0,0,0.45)]">
+                  {item.description}
+                </p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
     </BackgroundCarousel>

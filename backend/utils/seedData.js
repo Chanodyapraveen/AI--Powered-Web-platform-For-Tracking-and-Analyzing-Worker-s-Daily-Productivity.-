@@ -221,3 +221,10 @@ const seedData = async () => {
 };
 
 seedData();
+/*{
+Demo accounts:
+  Admin:   admin@demo.com   / admin123
+  Manager: manager@demo.com / manager123
+  Worker:  worker@demo.com  / worker123
+  
+  }*/
