@@ -100,6 +100,35 @@ const Home = () => {
     },
   ];
 
+  const dailyFlowSteps = [
+    {
+      step: "01",
+      title: "Plan & Assign",
+      description: "Create rounds by field; assign pluckers and supervisors.",
+    },
+    {
+      step: "02",
+      title: "Pluck & Record",
+      description: "Capture plucking per worker; note quality and weather.",
+    },
+    {
+      step: "03",
+      title: "Weigh & Verify",
+      description: "Weigh leaves at sheds; auto-sum per field and per truck.",
+    },
+    {
+      step: "04",
+      title: "Transport",
+      description: "Schedule trips; track loads and ETA to factory.",
+    },
+    {
+      step: "05",
+      title: "Factory Handover",
+      description:
+        "Issue handover note, get digital acknowledgment at the gate.",
+    },
+  ];
+
   return (
     <BackgroundCarousel
       images={CAROUSEL_IMAGES}
@@ -176,7 +205,7 @@ const Home = () => {
       </main>
 
       {/* Statistics Section */}
-      <section className="py-8 bg-black/60 backdrop-blur-md">
+      <section className="py-8 ">
         <div className="max-w-7xl mx-auto px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {stats.map((stat, index) => (
             <div
@@ -212,6 +241,40 @@ const Home = () => {
                 <p className="text-white/85 text-lg leading-relaxed drop-shadow-[1px_1px_2px_rgba(0,0,0,0.45)]">
                   {item.description}
                 </p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Daily Flow Section */}
+      <section className="pb-20 pt-4">
+        <div className="max-w-7xl mx-auto px-6 md:px-8">
+          <h2 className="text-[2.2rem] md:text-[3.2rem] leading-[1.08] font-bold text-white drop-shadow-[2px_2px_3px_rgba(0,0,0,0.5)] mb-8 md:mb-10">
+            From Leaf to Factory - Your Daily Flow
+          </h2>
+
+          <div className="relative pl-3 md:pl-5 space-y-7 md:space-y-8">
+            <div className="absolute left-[14px] md:left-[18px] top-4 bottom-4 w-px bg-white/40" />
+
+            {dailyFlowSteps.map((item, index) => (
+              <article key={index} className="relative">
+                <div className="absolute left-[-3px] md:left-[-1px] top-8 w-4 h-4 rounded-full bg-[#3ce6bd] shadow-[0_0_0_4px_rgba(60,230,189,0.25)]" />
+
+                <div className="ml-6 md:ml-8 rounded-2xl border border-white/25 bg-white/12 backdrop-blur-xl px-5 md:px-7 py-5 md:py-4 md:h-[164px] shadow-[0_12px_35px_rgba(0,0,0,0.28)]">
+                  <div className="flex items-baseline gap-3 mb-2">
+                    <span className="text-[#66f1cc] text-[1.45rem] md:text-[1.85rem] leading-none font-extrabold tracking-wide">
+                      {item.step}
+                    </span>
+                    <h3 className="text-[1.8rem] md:text-[2.25rem] font-bold text-white leading-tight drop-shadow-[1px_1px_2px_rgba(0,0,0,0.45)]">
+                      {item.title}
+                    </h3>
+                  </div>
+
+                  <p className="text-white/85 text-[1.15rem] md:text-[1.45rem] leading-[1.35] drop-shadow-[1px_1px_2px_rgba(0,0,0,0.45)]">
+                    {item.description}
+                  </p>
+                </div>
               </article>
             ))}
           </div>
