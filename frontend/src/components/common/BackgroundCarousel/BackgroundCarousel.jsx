@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 
 // Placeholder images — replace these with your own image paths/URLs
 const DEFAULT_IMAGES = [
- "/images/banner-sp-1024x576.jpg",
+  "/images/banner-sp-1024x576.jpg",
   "/images/jerry-kavan-i9eaAR4dWi8-unsplash.jpg",
   "/images/pexels-andrea-zanenga-9756792-6120446.jpg",
 ];
@@ -55,10 +55,14 @@ const BackgroundCarousel = ({
       {images.map((image, index) => (
         <div
           key={index}
-          className={`absolute inset-0 transition-opacity duration-700 ease-in-out bg-cover bg-center bg-no-repeat ${
+          className={`absolute inset-0 transition-opacity duration-700 ease-in-out bg-center bg-no-repeat ${
             index === currentIndex ? "opacity-100 z-[0]" : "opacity-0 z-[-1]"
           }`}
-          style={{ backgroundImage: `url(${image})` }}
+          style={{
+            backgroundImage: `url(${image})`,
+            backgroundSize: "100% 100%",
+            backgroundAttachment: "fixed",
+          }}
           aria-hidden={index !== currentIndex}
         />
       ))}

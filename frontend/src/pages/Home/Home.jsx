@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
 import Button from "../../components/common/Button/Button";
 import BackgroundCarousel from "../../components/common/BackgroundCarousel/BackgroundCarousel";
+import Footer from "../../components/common/footer/footer";
 import {
   FiUser,
   FiTrendingUp,
@@ -280,6 +281,8 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      <Footer />
     </BackgroundCarousel>
   );
 };
