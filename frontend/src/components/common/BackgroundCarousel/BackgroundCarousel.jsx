@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 
-// Placeholder images — replace these with your own image paths/URLs
+
 const DEFAULT_IMAGES = [
   "/images/banner-sp-1024x576.jpg",
   "/images/jerry-kavan-i9eaAR4dWi8-unsplash.jpg",
@@ -116,23 +116,7 @@ const BackgroundCarousel = ({
         </>
       )}
 
-      {/* Dot Indicators */}
-      {showIndicators && images.length > 1 && (
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-[3] flex gap-2">
-          {images.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`w-2.5 h-2.5 rounded-full border border-white/60 transition-all duration-300 cursor-pointer ${
-                index === currentIndex
-                  ? "bg-white w-7"
-                  : "bg-white/40 hover:bg-white/60"
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
-      )}
+     
 
       {/* Content rendered on top */}
       <div className="relative z-[2] min-h-screen flex flex-col">

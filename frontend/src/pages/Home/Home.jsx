@@ -15,8 +15,6 @@ import {
   FiClipboard,
   FiBox,
 } from "react-icons/fi";
-
-// Replace these with your actual image paths/URLs
 const CAROUSEL_IMAGES = [
   "/images/banner-sp-1024x576.jpg",
   "/images/jerry-kavan-i9eaAR4dWi8-unsplash.jpg",
@@ -213,10 +211,10 @@ const Home = () => {
               key={index}
               className="text-center p-6 bg-white/10 rounded-xl backdrop-blur-md border border-white/20 transition-all duration-300 hover:-translate-y-1 hover:bg-white/15"
             >
-              <div className="text-4xl font-bold text-white mb-2 drop-shadow-[2px_2px_4px_rgba(0,0,0,0.5)]">
+              <div className="text-3xl font-bold text-white mb-2 drop-shadow-[2px_2px_4px_rgba(0,0,0,0.5)]">
                 {stat.value}
               </div>
-              <div className="text-base text-white/80 font-medium drop-shadow-[1px_1px_2px_rgba(0,0,0,0.5)]">
+              <div className="text-sm text-white/80 font-medium drop-shadow-[1px_1px_2px_rgba(0,0,0,0.5)]">
                 {stat.label}
               </div>
             </div>
@@ -236,10 +234,10 @@ const Home = () => {
                 <div className="w-11 h-11 rounded-xl border border-white/35 bg-white/15 flex items-center justify-center text-white text-xl mb-4">
                   {item.icon}
                 </div>
-                <h3 className="text-3xl sm:text-[2rem] leading-tight font-bold text-white drop-shadow-[1px_1px_2px_rgba(0,0,0,0.5)] mb-3">
+                <h3 className="text-2xl sm:text-[1.6rem] leading-tight font-bold text-white drop-shadow-[1px_1px_2px_rgba(0,0,0,0.5)] mb-3">
                   {item.title}
                 </h3>
-                <p className="text-white/85 text-lg leading-relaxed drop-shadow-[1px_1px_2px_rgba(0,0,0,0.45)]">
+                <p className="text-white/85 text-base leading-relaxed drop-shadow-[1px_1px_2px_rgba(0,0,0,0.45)]">
                   {item.description}
                 </p>
               </article>
@@ -251,7 +249,7 @@ const Home = () => {
       {/* Daily Flow Section */}
       <section className="pb-20 pt-4">
         <div className="max-w-7xl mx-auto px-6 md:px-8">
-          <h2 className="text-[2.2rem] md:text-[3.2rem] leading-[1.08] font-bold text-white drop-shadow-[2px_2px_3px_rgba(0,0,0,0.5)] mb-8 md:mb-10">
+          <h2 className="text-[1.8rem] md:text-[2.4rem] leading-[1.1] font-bold text-white drop-shadow-[2px_2px_3px_rgba(0,0,0,0.5)] mb-8 md:mb-10">
             From Leaf to Factory - Your Daily Flow
           </h2>
 
@@ -264,15 +262,15 @@ const Home = () => {
 
                 <div className="ml-6 md:ml-8 rounded-2xl border border-white/25 bg-white/12 backdrop-blur-xl px-5 md:px-7 py-5 md:py-4 md:h-[164px] shadow-[0_12px_35px_rgba(0,0,0,0.28)]">
                   <div className="flex items-baseline gap-3 mb-2">
-                    <span className="text-[#66f1cc] text-[1.45rem] md:text-[1.85rem] leading-none font-extrabold tracking-wide">
+                    <span className="text-[#66f1cc] text-[1.15rem] md:text-[1.35rem] leading-none font-extrabold tracking-wide">
                       {item.step}
                     </span>
-                    <h3 className="text-[1.8rem] md:text-[2.25rem] font-bold text-white leading-tight drop-shadow-[1px_1px_2px_rgba(0,0,0,0.45)]">
+                    <h3 className="text-[1.3rem] md:text-[1.7rem] font-bold text-white leading-tight drop-shadow-[1px_1px_2px_rgba(0,0,0,0.45)]">
                       {item.title}
                     </h3>
                   </div>
 
-                  <p className="text-white/85 text-[1.15rem] md:text-[1.45rem] leading-[1.35] drop-shadow-[1px_1px_2px_rgba(0,0,0,0.45)]">
+                  <p className="text-white/85 text-base md:text-lg leading-[1.35] drop-shadow-[1px_1px_2px_rgba(0,0,0,0.45)]">
                     {item.description}
                   </p>
                 </div>
