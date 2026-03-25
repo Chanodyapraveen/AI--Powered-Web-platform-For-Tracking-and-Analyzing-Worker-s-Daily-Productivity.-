@@ -11,6 +11,7 @@ import Analytics from "../pages/Analytics/Analytics";
 import Login from "../pages/Login/Login";
 import Home from "../pages/Home/Home";
 import Register from "../pages/Register/Register";
+import AddIncidencePage from "../pages/AddincidencePage";
 import Loader from "../components/common/Loader/Loader";
 import { canAccessRoute } from "../utils/rbac";
 
@@ -107,6 +108,15 @@ const AppRoutes = () => {
         element={
           <ProtectedRoute>
             <WorkerDashboard />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/worker/incidences/add"
+        element={
+          <ProtectedRoute>
+            <AddIncidencePage />
           </ProtectedRoute>
         }
       />
