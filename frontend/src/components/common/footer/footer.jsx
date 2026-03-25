@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
+  FiFacebook,
+  FiTwitter,
+  FiInstagram,
+  FiLinkedin,
+} from "react-icons/fi";
+import {
   Leaf,
   Mail,
   Phone,
   MapPin,
-  Facebook,
-  Twitter,
-  Instagram,
-  Linkedin,
   Home,
   BarChart2,
   Wrench,
@@ -160,7 +162,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="p-2 rounded-full bg-base-content/15 hover:bg-emerald-500/20 text-base-content/70 hover:text-emerald-500 transition"
               >
-                <Facebook className="w-5 h-5" />
+                <FiFacebook className="w-5 h-5" />
               </a>
               <a
                 href="https://twitter.com/ceylonleaf"
@@ -168,7 +170,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="p-2 rounded-full bg-base-content/15 hover:bg-emerald-500/20 text-base-content/70 hover:text-emerald-500 transition"
               >
-                <Twitter className="w-5 h-5" />
+                <FiTwitter className="w-5 h-5" />
               </a>
               <a
                 href="https://www.instagram.com/ceylonleaf"
@@ -176,7 +178,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="p-2 rounded-full bg-base-content/15 hover:bg-emerald-500/20 text-base-content/70 hover:text-emerald-500 transition"
               >
-                <Instagram className="w-5 h-5" />
+                <FiInstagram className="w-5 h-5" />
               </a>
               <a
                 href="https://www.linkedin.com/company/ceylonleaf"
@@ -184,7 +186,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="p-2 rounded-full bg-base-content/15 hover:bg-emerald-500/20 text-base-content/70 hover:text-emerald-500 transition"
               >
-                <Linkedin className="w-5 h-5" />
+                <FiLinkedin className="w-5 h-5" />
               </a>
             </div>
           </div>
