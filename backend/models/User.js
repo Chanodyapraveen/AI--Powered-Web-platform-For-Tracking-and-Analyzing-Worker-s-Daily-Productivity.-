@@ -71,17 +71,4 @@ userSchema.methods.toJSON = function () {
 
 module.exports = mongoose.model("User", userSchema);
 
-/*
-{
-"name": "Test User",
-"email": "testuser123@example.com",
-"password": "123456",
-"role": "worker"
-}
 
-{ "name": "Manager User",
-  "email": "manager@example.com",
-  "password": "manager123"
-}
-}
-*/

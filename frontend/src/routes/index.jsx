@@ -5,6 +5,7 @@ import Navbar from "../components/layout/Navbar/Navbar";
 import Sidebar from "../components/layout/Sidebar/Sidebar";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Workers from "../pages/Workers/WorkersDashboard";
+import WorkerDashboard from "../pages/Workers/WorkersDashboard";
 import Tasks from "../pages/Tasks/Tasks";
 import Analytics from "../pages/Analytics/Analytics";
 import Login from "../pages/Login/Login";
@@ -98,6 +99,15 @@ const AppRoutes = () => {
               <Workers />
             </AppLayout>
           </RoleRoute>
+        }
+      />
+
+      <Route
+        path="/worker-dashboard"
+        element={
+          <ProtectedRoute>
+            <WorkerDashboard />
+          </ProtectedRoute>
         }
       />
 

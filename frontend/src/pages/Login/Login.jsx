@@ -53,11 +53,17 @@ const Login = () => {
 
     setLoading(true);
     try {
-      await login({
+      const response = await login({
         ...formData,
         email: formData.email.trim().toLowerCase(),
       });
-      navigate("/dashboard");
+
+      const loggedInRole = response?.user?.role;
+      if (loggedInRole === "worker") {
+        navigate("/worker-dashboard");
+      } else {
+        navigate("/dashboard");
+      }
     } catch (error) {
       setErrors({
         general:
