@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import {
-  FiFacebook,
-  FiTwitter,
-  FiInstagram,
-  FiLinkedin,
-} from "react-icons/fi";
+import { FiFacebook, FiTwitter, FiInstagram, FiLinkedin } from "react-icons/fi";
 import {
   Leaf,
   Mail,
