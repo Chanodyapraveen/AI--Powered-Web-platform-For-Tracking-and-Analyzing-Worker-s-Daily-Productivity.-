@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
-import Input from "../../components/common/Input/Input";
-import Button from "../../components/common/Button/Button";
-import Card from "../../components/common/Card/Card";
+import { useAuth } from "../hooks/useAuth";
+import Input from "../components/common/Input/Input";
+import Button from "../components/common/Button/Button";
+import Card from "../components/common/Card/Card";
 import { FiMail, FiLock, FiArrowRight } from "react-icons/fi";
 
 const Login = () => {

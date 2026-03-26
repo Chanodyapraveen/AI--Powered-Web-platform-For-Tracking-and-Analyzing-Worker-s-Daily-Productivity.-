@@ -12,11 +12,11 @@ import {
   FiUser,
   FiUsers,
 } from "react-icons/fi";
-import Card from "../../components/common/Card/Card";
-import Input from "../../components/common/Input/Input";
-import Button from "../../components/common/Button/Button";
-import { useAuth } from "../../hooks/useAuth";
-import authService from "../../services/authService";
+import Card from "../components/common/Card/Card";
+import Input from "../components/common/Input/Input";
+import Button from "../components/common/Button/Button";
+import { useAuth } from "../hooks/useAuth";
+import authService from "../services/authService";
 
 const ROLE_OPTIONS = {
   admin: {

@@ -1,22 +1,360 @@
-import React from "react";
-import { BrowserRouter } from "react-router-dom";
-import { AuthProvider } from "./context/AuthContext";
-import { ThemeProvider } from "./context/ThemeContext";
-import { NotificationProvider } from "./context/NotificationContext";
-import AppRoutes from "./routes";
+// FRONTEND/src/App.jsx
+import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
-function App() {
+import RootLayout from './layouts/RootLayout.jsx';
+import SupervisorLayout from './layouts/SupervisorLayout.jsx';
+import AdminLayout from './layouts/AdminLayout.jsx';
+import InventoryLayout from './layouts/InventoryLayout.jsx';
+
+import RequireAuth from './components/RequireAuth.jsx';
+
+// Public
+import HomePage from './pages/HomePage.jsx';
+import LoginPage from './pages/LoginPage.jsx';
+
+// Notes (practice)
+import CreatePage from './pages/CreatePage.jsx';
+import NoteDetailPage from './pages/NoteDetailPage.jsx';
+
+// Admin
+import AdminDashboard from './pages/admin/AdminDashboard.jsx';
+import AdminUsers from './components/AdminUsers.jsx';
+import FieldsPage from './pages/admin/FieldsPage.jsx';
+import AdminNotifications from './pages/admin/AdminNotifications.jsx';
+
+// Supervisor
+import SupervisorDashboard from './pages/supervisor/SupervisorDashboard.jsx';
+import AttendanceList from './pages/supervisor/attendance/AttendanceList.jsx';
+import AttendanceForm from './pages/supervisor/attendance/AttendanceForm.jsx';
+import AttendanceScan from './pages/supervisor/attendance/AttendanceScan.jsx';
+import TaskAssign from './pages/supervisor/TaskAssign.jsx';
+
+// Incidents
+import IncidencePage from './pages/IncidencePage.jsx';
+import AddIncidencePage from './pages/AddIncidencePage.jsx';
+import IncidenceDetailPage from './pages/IncidenceDetailPage.jsx';
+import UpdateIncidencePage from './pages/UpdateIncidencePage.jsx';
+
+
+
+// Plucking Record
+import PluckingRecordPage from './pages/PluckingRecordPage.jsx';
+import AddPluckingRecordPage from './pages/AddPluckingRecordPage.jsx';
+import ViewPluckingRecordPage from './pages/ViewPluckingRecordPage.jsx';
+import EditPluckingRecordPage from './pages/EditPluckingRecordPage.jsx';
+
+// Other roles / features
+import WorkerDashboard from './pages/worker/WorkerDashboard.jsx';
+import ProductionDashboard from './pages/ProductionDashboard.jsx';
+import ProductionBatchPage from './pages/ProductionBatchPage.jsx';
+import CreateProductionBatch from './pages/CreateProductionBatch.jsx';
+import EditProductionBatch from './pages/EditProductionBatch.jsx';
+import ReportsPage from './pages/ReportsPage.jsx';
+import ProfilePage from './pages/ProfilePage.jsx';
+import InventoryManagerDashboard from './pages/inventory/InventoryManagerDashboard.jsx';
+import InventoryReports from './pages/inventory/InventoryReports.jsx';
+import InventoryStock from './pages/inventory/InventoryStock.jsx';
+import InventorySupplies from './pages/inventory/InventorySupplies.jsx';
+import ToolsPage from './pages/ToolsPage.jsx';
+import CreateToolPage from './pages/CreateToolPage.jsx';
+import ToolDetailPage from './pages/ToolDetailPage.jsx';
+import SuppliersPage from './pages/supplier/SuppliersPage.jsx';
+import SupplierEditPage from './pages/supplier/SupplierEditPage.jsx';
+import SupplierCreate from './pages/supplier/SupplierCreate.jsx';
+import PrivacyPage from './pages/PrivacyPage.jsx';
+import TermsPage from './pages/TermsPage.jsx';
+import SupportPage from './pages/SupportPage.jsx';
+import MyTicketsPage from './pages/tickets/MyTicketsPage.jsx';
+import AdminTicketsPage from './pages/tickets/AdminTicketsPage.jsx';
+
+export default function App() {
   return (
-    <BrowserRouter>
-      <ThemeProvider>
-        <AuthProvider>
-          <NotificationProvider>
-            <AppRoutes />
-          </NotificationProvider>
-        </AuthProvider>
-      </ThemeProvider>
-    </BrowserRouter>
+    <Routes>
+      {/* No-navbar route */}
+      <Route path="/login" element={<LoginPage />} />
+
+      {/* Routes with global Navbar via RootLayout */}
+      <Route element={<RootLayout />}>
+        {/* Public */}
+        <Route path="/" element={<HomePage />} />
+        <Route path="/privacy" element={<PrivacyPage />} />
+        <Route path="/terms" element={<TermsPage />} />
+        <Route path="/support" element={<SupportPage />} />
+
+        {/* ADMIN AREA with sub-navbar & breadcrumbs */}
+        <Route
+          path="/admin"
+          element={
+            <RequireAuth role="admin">
+              <AdminLayout />
+            </RequireAuth>
+          }
+        >
+          <Route index element={<AdminDashboard />} />
+          <Route path="users" element={<AdminUsers />} />
+          <Route path="fields" element={<FieldsPage />} />
+          <Route path="notifications" element={<AdminNotifications />} />
+          <Route path="tickets" element={<AdminTicketsPage />} />
+          
+          {/* Incidences (admin access) */}
+          <Route path="incidences" element={<IncidencePage />} />
+          <Route path="incidences/add" element={<AddIncidencePage />} />
+          <Route path="incidences/:id" element={<IncidenceDetailPage />} />
+          <Route path="incidences/:id/edit" element={<UpdateIncidencePage />} />
+        </Route>
+
+        {/* Notes (practice) */}
+        <Route
+          path="/notes/create"
+          element={
+            <RequireAuth>
+              <CreatePage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/notes/:id"
+          element={
+            <RequireAuth>
+              <NoteDetailPage />
+            </RequireAuth>
+          }
+        />
+
+        {/* SUPERVISOR AREA with sub-navbar & breadcrumbs */}
+        <Route
+          path="/supervisor"
+          element={
+            <RequireAuth role="field_supervisor">
+              <SupervisorLayout />
+            </RequireAuth>
+          }
+        >
+          <Route index element={<SupervisorDashboard />} />
+
+          {/* Attendance */}
+          <Route path="attendance" element={<AttendanceList />} />
+          <Route path="attendance/new" element={<AttendanceForm />} />
+          <Route path="attendance/:id" element={<AttendanceForm />} />
+          <Route path="attendance/:id/edit" element={<AttendanceForm />} />
+          <Route path="attendance/scan" element={<AttendanceScan />} />
+
+          {/* Tasks */}
+          <Route path="tasks" element={<TaskAssign />} />
+
+          {/* Incidents (scoped) */}
+          <Route path="incidences" element={<IncidencePage />} />
+          <Route path="incidences/add" element={<AddIncidencePage />} />
+          <Route path="incidences/:id" element={<IncidenceDetailPage />} />
+          <Route path="incidences/:id/edit" element={<UpdateIncidencePage />} />
+
+          {/* Pest & Disease (scoped) */}
+          <Route path="pest-disease" element={<PestDiseasePage />} />
+          <Route path="pest-disease/add" element={<AddPestDiseasePage />} />
+          <Route path="pest-disease/:id" element={<PestDiseaseDetailPage />} />
+          <Route path="pest-disease/:id/edit" element={<UpdatePestDiseasePage />} />
+
+          {/* Plucking Records (scoped) */}
+          <Route path="plucking-records" element={<PluckingRecordPage />} />
+          <Route path="plucking-records/add" element={<AddPluckingRecordPage />} />
+          <Route path="plucking-records/:id" element={<ViewPluckingRecordPage />} />
+          <Route path="plucking-records/:id/edit" element={<EditPluckingRecordPage />} />
+          <Route path="tickets" element={<MyTicketsPage title="Field Support Tickets" />} />
+        </Route>
+
+        {/* Legacy routes (still valid) */}
+        <Route path="/incidences" element={<RequireAuth><IncidencePage /></RequireAuth>} />
+        <Route path="/incidences/add" element={<RequireAuth><AddIncidencePage /></RequireAuth>} />
+        <Route path="/incidences/:id" element={<RequireAuth><IncidenceDetailPage /></RequireAuth>} />
+        <Route path="/incidences/:id/edit" element={<RequireAuth><UpdateIncidencePage /></RequireAuth>} />
+
+        <Route path="pest-disease" element={<PestDiseasePage />} />
+        <Route path="pest-disease/add" element={<AddPestDiseasePage />} />
+        <Route path="pest-disease/:id" element={<PestDiseaseDetailPage />} />
+        <Route path="pest-disease/:id/edit" element={<UpdatePestDiseasePage />} />
+
+        <Route path="/plucking-records" element={<RequireAuth><PluckingRecordPage /></RequireAuth>} />
+        <Route path="/plucking-records/add" element={<RequireAuth><AddPluckingRecordPage /></RequireAuth>} />
+        <Route path="/plucking-records/:id" element={<RequireAuth><ViewPluckingRecordPage /></RequireAuth>} />
+        <Route path="/plucking-records/:id/edit" element={<RequireAuth><EditPluckingRecordPage /></RequireAuth>} />
+
+        {/* Worker */}
+        <Route
+          path="/worker"
+          element={
+            <RequireAuth role="worker">
+              <WorkerDashboard />
+            </RequireAuth>
+          }
+        />
+        
+        {/* Worker Incidence Routes */}
+        <Route
+          path="/worker/incidences"
+          element={
+            <RequireAuth role="worker">
+              <IncidencePage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/worker/incidences/add"
+          element={
+            <RequireAuth role="worker">
+              <AddIncidencePage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/worker/incidences/:id"
+          element={
+            <RequireAuth role="worker">
+              <IncidenceDetailPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/worker/incidences/:id/edit"
+          element={
+            <RequireAuth role="worker">
+              <UpdateIncidencePage />
+            </RequireAuth>
+          }
+        />
+
+        {/* Production Manager */}
+        <Route
+          path="/production-dashboard"
+          element={
+            <RequireAuth role="production_manager">
+              <ProductionDashboard />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/production-batches"
+          element={
+            <RequireAuth role="production_manager">
+              <ProductionBatchPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/create-production-batch"
+          element={
+            <RequireAuth role="production_manager">
+              <CreateProductionBatch />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/edit-production-batch/:id"
+          element={
+            <RequireAuth role="production_manager">
+              <EditProductionBatch />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/transports"
+          element={
+            <RequireAuth role="production_manager">
+              <TransportPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/create-transport"
+          element={
+            <RequireAuth role="production_manager">
+              <CreateTransport />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/edit-transport/:id"
+          element={
+            <RequireAuth role="production_manager">
+              <EditTransport />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/reports"
+          element={
+            <RequireAuth role="production_manager">
+              <ReportsPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <RequireAuth role="production_manager">
+              <ProfilePage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/vehicle-tracking"
+          element={
+            <RequireAuth role="production_manager">
+              <VehicleTracking />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/production/tickets"
+          element={
+            <RequireAuth role="production_manager">
+              <MyTicketsPage title="Production Support Tickets" />
+            </RequireAuth>
+          }
+        />
+
+        {/* INVENTORY MANAGER AREA with sub-navbar & breadcrumbs */}
+        <Route
+          path="/inventory"
+          element={
+            <RequireAuth role="inventory_manager">
+              <InventoryLayout />
+            </RequireAuth>
+          }
+        >
+          <Route index element={<InventoryManagerDashboard />} />
+          <Route path="stock" element={<InventoryStock />} />
+          <Route path="supplies" element={<InventorySupplies />} />
+          <Route path="reports" element={<InventoryReports />} />
+          
+          {/* Tools */}
+          <Route path="tools" element={<ToolsPage />} />
+          <Route path="tools/create" element={<CreateToolPage />} />
+          <Route path="tools/:id" element={<ToolDetailPage />} />
+          
+          {/* FNI */}
+          <Route path="fni" element={<FNIPage />} />
+          <Route path="fni/create" element={<FNICreate />} />
+          <Route path="fni/:id/edit" element={<FNIEditPage />} />
+          
+          {/* Suppliers */}
+          <Route path="suppliers" element={<SuppliersPage />} />
+          <Route path="suppliers/create" element={<SupplierCreate />} />
+          <Route path="suppliers/:id/edit" element={<SupplierEditPage />} />
+          
+          {/* Pest & Disease - View Only */}
+          <Route path="pest-disease" element={<PestDiseasePage viewOnly={true} />} />
+          <Route path="pest-disease/:id" element={<PestDiseaseDetailPage viewOnly={true} />} />
+          
+          <Route path="tickets" element={<MyTicketsPage title="Inventory Support Tickets" />} />
+        </Route>
+
+        {/* Fallback inside layout */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Route>
+
+      {/* Extra safety net */}
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 }
-
-export default App;
