@@ -1,78 +1,71 @@
 // FRONTEND/src/App.jsx
-import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import React from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 
-import RootLayout from './layouts/RootLayout.jsx';
-import SupervisorLayout from './layouts/SupervisorLayout.jsx';
-import AdminLayout from './layouts/AdminLayout.jsx';
-import InventoryLayout from './layouts/InventoryLayout.jsx';
+import RootLayout from "../layouts/RootLayout.jsx";
+import SupervisorLayout from "../layouts/SupervisorLayout.jsx";
+import AdminLayout from "../layouts/AdminLayout.jsx";
+import InventoryLayout from "../layouts/InventoryLayout.jsx";
 
-import RequireAuth from './components/RequireAuth.jsx';
+import RequireAuth from "./components/RequireAuth.jsx";
 
 // Public
-import HomePage from './pages/HomePage.jsx';
-import LoginPage from './pages/LoginPage.jsx';
+import HomePage from "./pages/HomePage.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
+import RegisterPage from "./pages/Register.jsx";
 
 // Notes (practice)
-import CreatePage from './pages/CreatePage.jsx';
-import NoteDetailPage from './pages/NoteDetailPage.jsx';
+import CreatePage from "./pages/CreatePage.jsx";
 
 // Admin
-import AdminDashboard from './pages/admin/AdminDashboard.jsx';
-import AdminUsers from './components/AdminUsers.jsx';
-import FieldsPage from './pages/admin/FieldsPage.jsx';
-import AdminNotifications from './pages/admin/AdminNotifications.jsx';
+import AdminDashboard from "./pages/admin/adminDashboard.jsx";
+import AdminUsers from "./pages/admin/Users.Pages.jsx";
+import FieldsPage from "./pages/admin/FieldPage.jsx";
+import AdminNotifications from "./pages/admin/AdminNotifiaction.jsx";
 
 // Supervisor
-import SupervisorDashboard from './pages/supervisor/SupervisorDashboard.jsx';
-import AttendanceList from './pages/supervisor/attendance/AttendanceList.jsx';
-import AttendanceForm from './pages/supervisor/attendance/AttendanceForm.jsx';
-import AttendanceScan from './pages/supervisor/attendance/AttendanceScan.jsx';
-import TaskAssign from './pages/supervisor/TaskAssign.jsx';
+import SupervisorDashboard from "./pages/supervisor/attendance/SupervisorDashboard.jsx";
+import TaskAssign from "./pages/supervisor/attendance/TaskAssign.jsx";
 
 // Incidents
-import IncidencePage from './pages/IncidencePage.jsx';
-import AddIncidencePage from './pages/AddIncidencePage.jsx';
-import IncidenceDetailPage from './pages/IncidenceDetailPage.jsx';
-import UpdateIncidencePage from './pages/UpdateIncidencePage.jsx';
-
-
+import IncidencePage from "./pages/IncidencePage.jsx";
+import AddIncidencePage from "./pages/AddincidencePage.jsx";
+import IncidenceDetailPage from "./pages/IncidenceDetailsPage.jsx";
+import UpdateIncidencePage from "./pages/UpdateIncidentPage.jsx";
 
 // Plucking Record
-import PluckingRecordPage from './pages/PluckingRecordPage.jsx';
-import AddPluckingRecordPage from './pages/AddPluckingRecordPage.jsx';
-import ViewPluckingRecordPage from './pages/ViewPluckingRecordPage.jsx';
-import EditPluckingRecordPage from './pages/EditPluckingRecordPage.jsx';
+import PluckingRecordPage from "./pages/PluckingRecordPage.jsx";
+import AddPluckingRecordPage from "./pages/AddPluckingRecordPage.jsx";
+import ViewPluckingRecordPage from "./pages/ViewPluckingRecordPage.jsx";
+import EditPluckingRecordPage from "./pages/EditPluckingRecord.jsx";
 
 // Other roles / features
-import WorkerDashboard from './pages/worker/WorkerDashboard.jsx';
-import ProductionDashboard from './pages/ProductionDashboard.jsx';
-import ProductionBatchPage from './pages/ProductionBatchPage.jsx';
-import CreateProductionBatch from './pages/CreateProductionBatch.jsx';
-import EditProductionBatch from './pages/EditProductionBatch.jsx';
-import ReportsPage from './pages/ReportsPage.jsx';
-import ProfilePage from './pages/ProfilePage.jsx';
-import InventoryManagerDashboard from './pages/inventory/InventoryManagerDashboard.jsx';
-import InventoryReports from './pages/inventory/InventoryReports.jsx';
-import InventoryStock from './pages/inventory/InventoryStock.jsx';
-import InventorySupplies from './pages/inventory/InventorySupplies.jsx';
-import ToolsPage from './pages/ToolsPage.jsx';
-import CreateToolPage from './pages/CreateToolPage.jsx';
-import ToolDetailPage from './pages/ToolDetailPage.jsx';
-import SuppliersPage from './pages/supplier/SuppliersPage.jsx';
-import SupplierEditPage from './pages/supplier/SupplierEditPage.jsx';
-import SupplierCreate from './pages/supplier/SupplierCreate.jsx';
-import PrivacyPage from './pages/PrivacyPage.jsx';
-import TermsPage from './pages/TermsPage.jsx';
-import SupportPage from './pages/SupportPage.jsx';
-import MyTicketsPage from './pages/tickets/MyTicketsPage.jsx';
-import AdminTicketsPage from './pages/tickets/AdminTicketsPage.jsx';
+import WorkerDashboard from "./pages/Workers/WorkersDashboard.jsx";
+import ProductionDashboard from "./pages/ProductionDashboard.jsx";
+import ProductionBatchPage from "./pages/ProductionBatchPage.jsx";
+import CreateProductionBatch from "./pages/CreaterProductinBatch.jsx";
+import EditProductionBatch from "./pages/EditProductionBatch.jsx";
+import ReportsPage from "./pages/ReportPage.jsx";
+import ProfilePage from "./pages/ProfilePage.jsx";
+import InventoryManagerDashboard from "./pages/Inventory/InventoryManagerDashboard.jsx";
+import InventoryReports from "./pages/Inventory/InventoryReport.jsx";
+import InventoryStock from "./pages/Inventory/InventoryStock.jsx";
+import InventorySupplies from "./pages/Inventory/InventorySupplies.jsx";
+import ToolsPage from "./pages/ToolsPage.jsx";
+import CreateToolPage from "./pages/CreateToolpage.jsx";
+import ToolDetailPage from "./pages/ToolDetailsPage.jsx";
+import SuppliersPage from "./pages/supplier/SupplierPage.jsx";
+import SupplierEditPage from "./pages/supplier/SupplierEditPage.jsx";
+import SupplierCreate from "./pages/supplier/SupplierCreate.jsx";
+import PrivacyPage from "./pages/PrivacyPage.jsx";
+import TermsPage from "./pages/TermsPage.jsx";
 
 export default function App() {
   return (
     <Routes>
       {/* No-navbar route */}
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
 
       {/* Routes with global Navbar via RootLayout */}
       <Route element={<RootLayout />}>
@@ -80,7 +73,6 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/privacy" element={<PrivacyPage />} />
         <Route path="/terms" element={<TermsPage />} />
-        <Route path="/support" element={<SupportPage />} />
 
         {/* ADMIN AREA with sub-navbar & breadcrumbs */}
         <Route
@@ -95,32 +87,13 @@ export default function App() {
           <Route path="users" element={<AdminUsers />} />
           <Route path="fields" element={<FieldsPage />} />
           <Route path="notifications" element={<AdminNotifications />} />
-          <Route path="tickets" element={<AdminTicketsPage />} />
-          
+
           {/* Incidences (admin access) */}
           <Route path="incidences" element={<IncidencePage />} />
           <Route path="incidences/add" element={<AddIncidencePage />} />
           <Route path="incidences/:id" element={<IncidenceDetailPage />} />
           <Route path="incidences/:id/edit" element={<UpdateIncidencePage />} />
         </Route>
-
-        {/* Notes (practice) */}
-        <Route
-          path="/notes/create"
-          element={
-            <RequireAuth>
-              <CreatePage />
-            </RequireAuth>
-          }
-        />
-        <Route
-          path="/notes/:id"
-          element={
-            <RequireAuth>
-              <NoteDetailPage />
-            </RequireAuth>
-          }
-        />
 
         {/* SUPERVISOR AREA with sub-navbar & breadcrumbs */}
         <Route
@@ -132,15 +105,6 @@ export default function App() {
           }
         >
           <Route index element={<SupervisorDashboard />} />
-
-          {/* Attendance */}
-          <Route path="attendance" element={<AttendanceList />} />
-          <Route path="attendance/new" element={<AttendanceForm />} />
-          <Route path="attendance/:id" element={<AttendanceForm />} />
-          <Route path="attendance/:id/edit" element={<AttendanceForm />} />
-          <Route path="attendance/scan" element={<AttendanceScan />} />
-
-          {/* Tasks */}
           <Route path="tasks" element={<TaskAssign />} />
 
           {/* Incidents (scoped) */}
@@ -149,35 +113,89 @@ export default function App() {
           <Route path="incidences/:id" element={<IncidenceDetailPage />} />
           <Route path="incidences/:id/edit" element={<UpdateIncidencePage />} />
 
-          {/* Pest & Disease (scoped) */}
-          <Route path="pest-disease" element={<PestDiseasePage />} />
-          <Route path="pest-disease/add" element={<AddPestDiseasePage />} />
-          <Route path="pest-disease/:id" element={<PestDiseaseDetailPage />} />
-          <Route path="pest-disease/:id/edit" element={<UpdatePestDiseasePage />} />
-
           {/* Plucking Records (scoped) */}
           <Route path="plucking-records" element={<PluckingRecordPage />} />
-          <Route path="plucking-records/add" element={<AddPluckingRecordPage />} />
-          <Route path="plucking-records/:id" element={<ViewPluckingRecordPage />} />
-          <Route path="plucking-records/:id/edit" element={<EditPluckingRecordPage />} />
-          <Route path="tickets" element={<MyTicketsPage title="Field Support Tickets" />} />
+          <Route
+            path="plucking-records/add"
+            element={<AddPluckingRecordPage />}
+          />
+          <Route
+            path="plucking-records/:id"
+            element={<ViewPluckingRecordPage />}
+          />
+          <Route
+            path="plucking-records/:id/edit"
+            element={<EditPluckingRecordPage />}
+          />
         </Route>
 
-        {/* Legacy routes (still valid) */}
-        <Route path="/incidences" element={<RequireAuth><IncidencePage /></RequireAuth>} />
-        <Route path="/incidences/add" element={<RequireAuth><AddIncidencePage /></RequireAuth>} />
-        <Route path="/incidences/:id" element={<RequireAuth><IncidenceDetailPage /></RequireAuth>} />
-        <Route path="/incidences/:id/edit" element={<RequireAuth><UpdateIncidencePage /></RequireAuth>} />
+        {/* Public Incidences Routes */}
+        <Route
+          path="/incidences"
+          element={
+            <RequireAuth>
+              <IncidencePage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/incidences/add"
+          element={
+            <RequireAuth>
+              <AddIncidencePage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/incidences/:id"
+          element={
+            <RequireAuth>
+              <IncidenceDetailPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/incidences/:id/edit"
+          element={
+            <RequireAuth>
+              <UpdateIncidencePage />
+            </RequireAuth>
+          }
+        />
 
-        <Route path="pest-disease" element={<PestDiseasePage />} />
-        <Route path="pest-disease/add" element={<AddPestDiseasePage />} />
-        <Route path="pest-disease/:id" element={<PestDiseaseDetailPage />} />
-        <Route path="pest-disease/:id/edit" element={<UpdatePestDiseasePage />} />
-
-        <Route path="/plucking-records" element={<RequireAuth><PluckingRecordPage /></RequireAuth>} />
-        <Route path="/plucking-records/add" element={<RequireAuth><AddPluckingRecordPage /></RequireAuth>} />
-        <Route path="/plucking-records/:id" element={<RequireAuth><ViewPluckingRecordPage /></RequireAuth>} />
-        <Route path="/plucking-records/:id/edit" element={<RequireAuth><EditPluckingRecordPage /></RequireAuth>} />
+        {/* Plucking Records Routes */}
+        <Route
+          path="/plucking-records"
+          element={
+            <RequireAuth>
+              <PluckingRecordPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/plucking-records/add"
+          element={
+            <RequireAuth>
+              <AddPluckingRecordPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/plucking-records/:id"
+          element={
+            <RequireAuth>
+              <ViewPluckingRecordPage />
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="/plucking-records/:id/edit"
+          element={
+            <RequireAuth>
+              <EditPluckingRecordPage />
+            </RequireAuth>
+          }
+        />
 
         {/* Worker */}
         <Route
@@ -188,7 +206,7 @@ export default function App() {
             </RequireAuth>
           }
         />
-        
+
         {/* Worker Incidence Routes */}
         <Route
           path="/worker/incidences"
@@ -257,30 +275,6 @@ export default function App() {
           }
         />
         <Route
-          path="/transports"
-          element={
-            <RequireAuth role="production_manager">
-              <TransportPage />
-            </RequireAuth>
-          }
-        />
-        <Route
-          path="/create-transport"
-          element={
-            <RequireAuth role="production_manager">
-              <CreateTransport />
-            </RequireAuth>
-          }
-        />
-        <Route
-          path="/edit-transport/:id"
-          element={
-            <RequireAuth role="production_manager">
-              <EditTransport />
-            </RequireAuth>
-          }
-        />
-        <Route
           path="/reports"
           element={
             <RequireAuth role="production_manager">
@@ -293,22 +287,6 @@ export default function App() {
           element={
             <RequireAuth role="production_manager">
               <ProfilePage />
-            </RequireAuth>
-          }
-        />
-        <Route
-          path="/vehicle-tracking"
-          element={
-            <RequireAuth role="production_manager">
-              <VehicleTracking />
-            </RequireAuth>
-          }
-        />
-        <Route
-          path="/production/tickets"
-          element={
-            <RequireAuth role="production_manager">
-              <MyTicketsPage title="Production Support Tickets" />
             </RequireAuth>
           }
         />
@@ -326,27 +304,16 @@ export default function App() {
           <Route path="stock" element={<InventoryStock />} />
           <Route path="supplies" element={<InventorySupplies />} />
           <Route path="reports" element={<InventoryReports />} />
-          
+
           {/* Tools */}
           <Route path="tools" element={<ToolsPage />} />
           <Route path="tools/create" element={<CreateToolPage />} />
           <Route path="tools/:id" element={<ToolDetailPage />} />
-          
-          {/* FNI */}
-          <Route path="fni" element={<FNIPage />} />
-          <Route path="fni/create" element={<FNICreate />} />
-          <Route path="fni/:id/edit" element={<FNIEditPage />} />
-          
+
           {/* Suppliers */}
           <Route path="suppliers" element={<SuppliersPage />} />
           <Route path="suppliers/create" element={<SupplierCreate />} />
           <Route path="suppliers/:id/edit" element={<SupplierEditPage />} />
-          
-          {/* Pest & Disease - View Only */}
-          <Route path="pest-disease" element={<PestDiseasePage viewOnly={true} />} />
-          <Route path="pest-disease/:id" element={<PestDiseaseDetailPage viewOnly={true} />} />
-          
-          <Route path="tickets" element={<MyTicketsPage title="Inventory Support Tickets" />} />
         </Route>
 
         {/* Fallback inside layout */}

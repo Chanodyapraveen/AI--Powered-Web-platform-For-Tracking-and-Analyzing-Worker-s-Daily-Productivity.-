@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import Button from "../components/common/Button/Button";
 import BackgroundCarousel from "../components/common/BackgroundCarousel/BackgroundCarousel";
-import Footer from "../components/common/footer/footer";
 import {
   FiUser,
   FiTrendingUp,
@@ -142,43 +141,7 @@ const Home = () => {
       showArrows={false}
     >
       {/* Header */}
-      <header className="py-4 bg-[#2d7d56]/90 backdrop-blur-md relative z-20">
-        <div className="max-w-7xl mx-auto px-6 md:px-8 flex justify-between items-center">
-          <div className="flex items-center gap-2 text-white">
-            <div className="text-2xl">🍃</div>
-            <span className="text-xl font-semibold">CeylonLeaf</span>
-          </div>
-
-          <div className="hidden md:flex items-center gap-3">
-            <Button
-              variant="outline"
-              onClick={handleLogin}
-              icon={<FiUser />}
-              className="!border-white/80 !text-white/90 hover:!bg-white/10 hover:!border-white hover:!text-white"
-            >
-              {isAuthenticated ? "Dashboard" : "Login"}
-            </Button>
-            {!isAuthenticated && (
-              <Button
-                variant="primary"
-                onClick={handleRegister}
-                className="!bg-white !text-[#1e6b52] hover:!bg-[#f3fbf7]"
-              >
-                Register
-              </Button>
-            )}
-          </div>
-
-          <button
-            className="md:hidden p-2 rounded-md text-white hover:bg-white/10"
-            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-            aria-label="Toggle menu"
-            aria-expanded={isMobileMenuOpen}
-          >
-            {isMobileMenuOpen ? <FiX size={22} /> : <FiMenu size={22} />}
-          </button>
-        </div>
-
+      <header className="py-4 bg-transparent relative z-20">
         {isMobileMenuOpen && (
           <div className="md:hidden mt-3 px-6 pb-2">
             <div className="bg-black/35 border border-white/25 rounded-xl p-3 space-y-3 backdrop-blur-md">
@@ -320,8 +283,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
-      <Footer />
     </BackgroundCarousel>
   );
 };

@@ -16,7 +16,7 @@ import Card from "../components/common/Card/Card";
 import Input from "../components/common/Input/Input";
 import Button from "../components/common/Button/Button";
 import { useAuth } from "../hooks/useAuth";
-import authService from "../services/authService";
+import { authService } from "../services/authService";
 
 const ROLE_OPTIONS = {
   admin: {
@@ -43,7 +43,7 @@ const ROLE_OPTIONS = {
 
 const Register = () => {
   const navigate = useNavigate();
-  const { user, isAuthenticated, register } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const isAdmin = user?.role === "admin";
 
   const [formData, setFormData] = useState({
@@ -186,7 +186,7 @@ const Register = () => {
         setSuccessMessage(response.message || "Account created successfully");
         resetForm();
       } else {
-        await register(payload);
+        await authService.register(payload);
         navigate("/dashboard");
       }
     } catch (error) {

@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Toast } from '../utils/sweet';
-import axios from 'axios';
-import { API_URL } from '../config/api.js';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Toast } from "../utils/sweet";
+import axios from "axios";
+import { API_URL } from "../../config/api.js";
 
 const api = axios.create({
   baseURL: API_URL,
   timeout: 5000,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
@@ -24,7 +24,7 @@ const CreateToolPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    
+
     // Validation
     if (!toolType) {
       setError("Tool type is required");
@@ -34,12 +34,16 @@ const CreateToolPage = () => {
       setError("Note must not exceed 200 characters");
       return;
     }
-    
+
     setLoading(true);
     try {
-      const res = await api.post("/tools", { toolType, condition, note: note.trim() });
+      const res = await api.post("/tools", {
+        toolType,
+        condition,
+        note: note.trim(),
+      });
       const created = res.data;
-      Toast.success(`Tool created: ${created.tool?.toolId || 'Successfully'}`);
+      Toast.success(`Tool created: ${created.tool?.toolId || "Successfully"}`);
       navigate("/inventory/tools");
     } catch (err) {
       if (err.response?.status === 409) {
@@ -56,24 +60,26 @@ const CreateToolPage = () => {
     <div className="min-h-screen bg-base-200">
       <div className="max-w-xl mx-auto p-6">
         <div className="flex items-center gap-4 mb-6">
-          <button 
-            onClick={() => navigate('/inventory/tools')}
+          <button
+            onClick={() => navigate("/inventory/tools")}
             className="btn btn-ghost btn-sm"
           >
             ← Back to Tools
           </button>
           <h1 className="text-2xl font-bold">Create New Tool</h1>
         </div>
-        
+
         {error && <div className="alert alert-error mb-4">{error}</div>}
-        
+
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
-            <label className="block mb-1 font-semibold">Tool Type <span className="text-error">*</span></label>
+            <label className="block mb-1 font-semibold">
+              Tool Type <span className="text-error">*</span>
+            </label>
             <select
               className="select select-bordered w-full"
               value={toolType}
-              onChange={e => setToolType(e.target.value)}
+              onChange={(e) => setToolType(e.target.value)}
               required
             >
               <option value="">Select type...</option>
@@ -89,7 +95,7 @@ const CreateToolPage = () => {
             <select
               className="select select-bordered w-full"
               value={condition}
-              onChange={e => setCondition(e.target.value)}
+              onChange={(e) => setCondition(e.target.value)}
             >
               <option value="new">New</option>
               <option value="good">Good</option>
@@ -102,7 +108,7 @@ const CreateToolPage = () => {
               className="textarea textarea-bordered w-full"
               rows={3}
               value={note}
-              onChange={e => {
+              onChange={(e) => {
                 const value = e.target.value.slice(0, 200);
                 setNote(value);
                 setNoteCharCount(value.length);
@@ -119,7 +125,9 @@ const CreateToolPage = () => {
             className={`btn btn-primary w-full ${loading ? "btn-disabled" : ""}`}
             disabled={loading}
           >
-            {loading ? <span className="loading loading-spinner loading-sm mr-2" /> : null}
+            {loading ? (
+              <span className="loading loading-spinner loading-sm mr-2" />
+            ) : null}
             Create Tool
           </button>
         </form>

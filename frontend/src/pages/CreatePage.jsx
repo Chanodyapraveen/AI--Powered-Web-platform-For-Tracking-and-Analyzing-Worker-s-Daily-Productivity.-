@@ -1,37 +1,40 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { Sweet, Toast } from '@/utils/sweet';
-import { API_URL } from '../config/api.js';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { Sweet, Toast } from "@/utils/sweet";
+import { API_URL } from "../../config/api.js";
 
 const api = axios.create({
   baseURL: API_URL,
   timeout: 5000,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
 const CreatePage = () => {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!title || !content) {
-      Toast.error('Both title and content are required');
+      Toast.error("Both title and content are required");
       return;
     }
 
     try {
-    await api.post('/notes', { title, content });
-    Toast.success('Note created successfully');
-    navigate('/');
+      await api.post("/notes", { title, content });
+      Toast.success("Note created successfully");
+      navigate("/");
     } catch (error) {
       console.error("Create failed:", error);
-      Sweet.error({ title: 'Failed to create note', text: error?.response?.data?.message || 'Please try again.' });
+      Sweet.error({
+        title: "Failed to create note",
+        text: error?.response?.data?.message || "Please try again.",
+      });
     }
   };
 

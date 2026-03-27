@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { Sweet, Toast } from "../utils/sweet";
 import axios from "axios";
-import { API_URL } from "../config/api.js";
+import { API_URL } from "../../config/api.js";
 
 const api = axios.create({
   baseURL: API_URL,
@@ -47,19 +47,19 @@ const ToolDetailPage = () => {
 
   const handleSave = async (e) => {
     e.preventDefault();
-    
+
     // Validation
     if (tool.note && tool.note.length > 200) {
       Toast.error("Note must not exceed 200 characters");
       return;
     }
-    
+
     setSaving(true);
     setError("");
     try {
       await api.put(`/tools/${id}`, {
         condition: tool.condition,
-        note: tool.note?.trim() || '',
+        note: tool.note?.trim() || "",
       });
       Toast.success("Tool updated successfully");
       navigate("/inventory/tools");
@@ -72,9 +72,13 @@ const ToolDetailPage = () => {
 
   const handleDelete = async () => {
     const ok = await Sweet.confirm(
-      'Are you sure you want to retire this tool? This action will mark the tool as retired.',
-      'Retire Tool',
-      { confirmButtonText: 'Retire', confirmButtonColor: '#d33', icon: 'warning' }
+      "Are you sure you want to retire this tool? This action will mark the tool as retired.",
+      "Retire Tool",
+      {
+        confirmButtonText: "Retire",
+        confirmButtonColor: "#d33",
+        icon: "warning",
+      },
     );
     if (!ok) return;
     setSaving(true);
@@ -105,18 +109,20 @@ const ToolDetailPage = () => {
           <div className="card bg-base-100 shadow-xl">
             <div className="card-body text-center">
               <div className="text-error text-6xl mb-4">🔧</div>
-              <h2 className="card-title text-2xl justify-center mb-2">Tool Not Found</h2>
+              <h2 className="card-title text-2xl justify-center mb-2">
+                Tool Not Found
+              </h2>
               <p className="text-base-content/70 mb-6">{error}</p>
               <div className="card-actions justify-center gap-4">
-                <button 
+                <button
                   className="btn btn-primary"
                   onClick={() => window.location.reload()}
                 >
                   Try Again
                 </button>
-                <button 
+                <button
                   className="btn btn-ghost"
-                  onClick={() => navigate('/inventory/tools')}
+                  onClick={() => navigate("/inventory/tools")}
                 >
                   Back to Tools
                 </button>
@@ -199,7 +205,9 @@ const ToolDetailPage = () => {
               className={`btn btn-primary ${saving ? "btn-disabled" : ""}`}
               disabled={saving}
             >
-              {saving ? <span className="loading loading-spinner loading-sm mr-2" /> : null}
+              {saving ? (
+                <span className="loading loading-spinner loading-sm mr-2" />
+              ) : null}
               Save Changes
             </button>
             <button
